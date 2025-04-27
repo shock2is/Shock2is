@@ -9,16 +9,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shock 2is</title>
   <style>
-    /* Estilos generales */
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #111;
-      color: white;
-      display: flex;
-      flex-direction: row;
-      height: 100vh;
-    }
+  /* Estilos generales */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #111;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  /* height: 100vh; */ /* << Elimina o comenta esta línea */
+  min-height: 100vh; /* Nuevo: asegura altura mínima de la pantalla, pero puede crecer */
+}
+
 
     /* Contenedor principal */
     .container {
