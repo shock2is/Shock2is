@@ -458,6 +458,43 @@ button#pagar-carrito:hover {
 }
 
 
+/* Responsiva */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+}
+
+.left-section, .right-section {
+  flex: 1;
+  padding: 20px;
+  min-height: 200px;
+}
+
+.left-section {
+  background-color: lightblue;
+}
+
+.right-section {
+  background-color: lightgreen;
+}
+
+/* --- Responsivo para pantallas pequeñas (móviles) --- */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Ahora las secciones se apilan verticalmente */
+    gap: 10px;
+  }
+}
+
+
   </style>
 </head>
 
@@ -745,6 +782,23 @@ button#pagar-carrito:hover {
     </div>
 
   </div>
+
+
+
+
+/*Responsiva*/
+
+<div class="container">
+  <div class="left-section">
+    <!-- Contenido de la sección izquierda -->
+    <p>Contenido de la izquierda</p>
+  </div>
+  <div class="right-section">
+    <!-- Contenido de la sección derecha -->
+    <p>Contenido de la derecha</p>
+  </div>
+</div>
+
 
   <!-- Scripts -->
   <script>
