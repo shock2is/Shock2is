@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shock 2is</title>
+  <style>
+    /* Estilos generales */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    /* Contenedor principal */
+    .container {
+      display: flex;
+      flex: 1;
+    }
+
+    /* Lado izquierdo */
+    .izquierda {
+      width: 30%;
+      background-color: #1c1c1c;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      overflow-y: auto;
+    }
+
+    .perfil-imagen img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      object-fit: cover;
+    }
+
+    /* Reproductor de audio */
+    .audio-player {
+      background-color: #333;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .audio-player h2 {
+      margin-bottom: 10px;
+    }
+
+    .audio-player ol {
+      padding-left: 20px;
+      margin: 0;
+      list-style-type: decimal;
+      text-align: left;
+    }
+
+    .audio-player li {
+      padding: 8px 0;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      text-transform: capitalize;
+    }
+
+    .audio-player li:hover {
+      color: #ff9800;
+    }
+
+    audio {
+      margin-top: 10px;
+      width: 100%;
+      background-color: #444;
+      border-radius: 5px;
+    }
+
+    /* Lado derecho */
+    .derecha {
+      width: 70%;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ff8000; 
+}
+
+/* Estilo general para los sliders */
+.slider {
+  margin-bottom: 40px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.slider h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.slide-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-images {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  overflow: hidden;
+}
+
+.slide-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: none;
+}
+
+.slide-images img.active {
+  display: block;
+}
+
+button.prev, button.next {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+}
+
+button.prev {
+  left: 10px;
+}
+
+button.next {
+  right: 10px;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+
+   /* Estilo para las secciones */
+section {
+  padding: 20px;
+  margin-top: 20px; /* Separación de las secciones desde el menú */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Estilos para la sección */
+#inicio {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+/* Contenedor de la imagen */
+.imagen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilo para la imagen */
+.imagen {
+  width: 500px;
+  height: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover de la imagen */
+.imagen:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para el menú de redes sociales */
+.social-media {
+  margin-top: 30px;
+}
+
+/* Estilo para los iconos de redes sociales */
+.social-icon {
+  font-size: 50px; /* Tamaño más grande del icono */
+  color: white; /* Color blanco */
+  margin: 0 30px; /* Mayor espaciado entre los iconos */
+  transition: color 0.3s ease, transform 0.3s ease; /* Efecto al pasar el mouse */
+}
+
+/* Cambio de color y animación en hover */
+.social-icon:hover {
+  color: #1c1c1c; /* Color oscuro al pasar el mouse */
+  transform: scale(1.3); /* Aumenta el tamaño un poco más al pasar el mouse */
+}
+
+
+
+/* Color de fondo blanco */
+section.color-blanco {
+  background-color: #ffffff;
+  color: #000;
+}
+
+/* Color de fondo gris oscuro */
+section.color2 {
+  background-color: #1c1c1c;
+  color: #fff;
+}
+
+/* Estilos de las secciones */
+section h2 {
+  margin-bottom: 10px;
+}
+
+section p {
+  margin-top: 10px;
+}
+
+
+
+    .boton {
+      background-color: #ff00cc;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    /* Loader */
+   #loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000; /* Fondo negro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-img {
+  width: 150px; /* Ajusta el tamaño si quieres */
+  animation: blink 1s infinite ease-in-out;
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Estilos de la tabla */
+.tabla-eventos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla-eventos th, .tabla-eventos td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.tabla-eventos th {
+  background-color: #1c1c1c;
+  color: white;
+}
+
+.tabla-eventos td {
+  background-color: #f9f9f9;
+}
+
+.tabla-eventos i {
+  margin-right: 5px;
+}
+
+/* Estilo para el botón de ver todos los conciertos */
+.boton-ver-conciertos {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.boton-ver-conciertos .btn {
+  background-color: #1c1c1c;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.boton-ver-conciertos .btn:hover {
+  background-color: #333;
+}
+
+
+
+/* Estilo general de la tienda */
+
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 20px;  /* Espaciado entre los productos */
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.producto {
+  border: 2px solid #1c1c1c;
+  padding: 10px;  /* Reducido el padding */
+  margin: 10px;
+  text-align: center;
+  background-color: #fff;
+  color: #333;
+  width: 150px;  /* Reducido el tamaño de los productos */
+  height: auto;
+  border-radius: 8px;  /* Bordes más suaves */
+  transition: transform 0.3s ease;  /* Efecto al pasar el ratón */
+}
+
+.producto:hover {
+  transform: scale(1.05);  /* Agrandar un poco el producto al pasar el ratón */
+}
+
+.producto-imagen {
+  width: 100%;
+  max-width: 100px;  /* Reducción del tamaño de las imágenes */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+button.agregar-carrito {
+  background-color: #1c1c1c;
+  color: white;
+  padding: 8px;  /* Reducido el tamaño del botón */
+  border: none;
+  cursor: pointer;
+  font-size: 14px;  /* Tamaño más pequeño */
+  border-radius: 5px;
+}
+
+button.agregar-carrito:hover {
+  background-color: #444;
+}
+
+/* Estilo para el carrito */
+.carrito-container {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 300px;  /* Ajuste de tamaño del contenedor del carrito */
+  margin: 0 auto;
+}
+
+.carrito-container h3 {
+  color: white;
+}
+
+#carrito-lista {
+  margin-bottom: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+#carrito-lista li {
+  padding: 5px 0;
+  font-size: 14px;  /* Reducido el tamaño del texto */
+}
+
+/* Botones de carrito */
+.botones-carrito {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+button {
+  background-color: #1c1c1c;
+  color: white;
+  border: none;
+  padding: 8px 15px;  /* Reducido el padding */
+  cursor: pointer;
+  font-size: 14px;  /* Reducido el tamaño del texto */
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+button#pagar-carrito {
+  background-color: #28a745;
+}
+
+button#pagar-carrito:hover {
+  background-color: #218838;
+}
+
+/* Estilo para las imágenes dentro de los contenedores de productos */
+.producto img {
+  transition: transform 0.3s ease; /* Suaviza la animación */
+}
+
+.producto:hover img {
+  transform: scale(3.2); /* Aumenta el tamaño de la imagen al 120% */
+}
+
+
+  </style>
+</head>
+
+<body class="loading">
+
+  <!-- Loader -->
+  <div id="loader">
+  <img src="loader.png" alt="Cargando..." class="loader-img">
+</div>
+
+
+  <!-- Contenedor principal -->
+  <div class="container">
+
+    <!-- Izquierda -->
+    <div class="izquierda">
+      <div class="perfil-imagen">
+        <img src="perfil.jpg" alt="Foto del Rapero">
+      </div>
+
+      <div class="audio-player">
+        <h2>Reproductor</h2>
+        <ol id="songList">
+          <li onclick="playSong('1')">Canción 1</li>
+          <li onclick="playSong('2')">Canción 2</li>
+          <li onclick="playSong('3')">Canción 3</li>
+          <li onclick="playSong('4')">Canción 4</li>
+          <li onclick="playSong('5')">Canción 5</li>
+        </ol>
+        <audio id="audioPlayer" controls>
+          <source id="audioSource" src="" type="audio/mp3">
+          Tu navegador no soporta el elemento de audio.
+        </audio>
+      </div>
+    </div>
+
+    <!-- Derecha -->
+    <div class="derecha">
+      <header>
+        <nav>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#biografia">Biografía</a></li>
+            <li><a href="#musica">Música</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#tienda">Tienda</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Secciones -->
+   <section class="seccion color1" id="inicio">
+ 
+  <div class="imagen-container">
+    <img src="supmenu.png" alt="Imagen de inicio" class="imagen">
+  </div>
+
+  <!-- Menú de redes sociales -->
+  <div class="social-media">
+    <a href="https://www.facebook.com/profile.php?id=100064216774361" target="_blank" class="social-icon">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://www.instagram.com/shok2is" target="_blank" class="social-icon">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://open.spotify.com/artist/4qoRFGdLInI1t0P2oOOYw9" target="_blank" class="social-icon">
+      <i class="fab fa-spotify"></i>
+    </a>
+    <a href="https://www.youtube.com/@shok2iS" target="_blank" class="social-icon">
+      <i class="fab fa-youtube"></i>
+    </a>
+  </div>
+
+</section>
+
+
+
+
+<section class="seccion color2" id="eventos">
+  <h2>Eventos</h2>
+  <p>Lista de próximos shows.</p>
+
+  <!-- Tabla de eventos -->
+  <table class="tabla-eventos">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Ubicación</th>
+        <th>Boletos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Fila 1 -->
+      <tr>
+        <td>15 Mayo 2025</td>
+        <td>Guadalajara, Jalisco</td>
+        <td><i class="fas fa-ticket-alt"></i> Adquiere tus boletos</td>
+      </tr>
+      <!-- Fila 2 -->
+      <tr>
+        <td>20 Mayo 2025</td>
+        <td>Zapopan, Jalisco</td>
+        <td><i class="fas fa-ticket-alt"></i> Adquiere tus boletos</td>
+      </tr>
+      <!-- Fila 3 -->
+      <tr>
+        <td>10 Junio 2025</td>
+        <td>Puerto Vallarta, Jalisco</td>
+        <td><i class="fas fa-ticket-alt"></i> Adquiere tus boletos</td>
+      </tr>
+      <!-- Fila 4 -->
+      <tr>
+        <td>25 Junio 2025</td>
+        <td>Tequila, Jalisco</td>
+        <td><i class="fas fa-ticket-alt"></i> Adquiere tus boletos</td>
+      </tr>
+      <!-- Fila 5 -->
+      <tr>
+        <td>5 Julio 2025</td>
+        <td>Sayula, Jalisco</td>
+        <td><i class="fas fa-ticket-alt"></i> Adquiere tus boletos</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Botón de ver todos los conciertos -->
+  <div class="boton-ver-conciertos">
+    <a href="#galeria" class="btn">Ver todos los conciertos</a>
+  </div>
+</section>
+
+
+
+<section class="seccion color1" id="tienda">
+  <h2>Tienda</h2>
+  <p>El 10% de las ventas son destinadas a un refugio para perros. ¡Compra productos exclusivos y ayuda a una buena causa!</p>
+  
+  <!-- Contenedor de productos -->
+  <div class="productos-container">
+    <!-- Producto 1: Poster -->
+    <div class="producto">
+      <img src="poster.jpg" alt="Poster" class="producto-imagen">
+      <h3>Poster</h3>
+      <p>$50.00</p>
+      <button class="agregar-carrito" data-precio="50" data-nombre="Poster">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 2: Botones -->
+    <div class="producto">
+      <img src="botones.jpg" alt="Botones" class="producto-imagen">
+      <h3>Botones</h3>
+      <p>$35.00</p>
+      <button class="agregar-carrito" data-precio="35" data-nombre="Botones">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 3: Camisa1 -->
+    <div class="producto">
+      <img src="camisa1.jpeg" alt="Camisa" class="producto-imagen">
+      <h3>Camisa blanca pitbull</h3>
+      <p>$200.00</p>
+      <button class="agregar-carrito" data-precio="200" data-nombre="Camisa blanca pitbull">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 4: Camisa2 -->
+    <div class="producto">
+      <img src="Camisa2.jpeg" alt="Camisa2" class="producto-imagen">
+      <h3>Camisa blanca logotipo</h3>
+      <p>$200.00</p>
+      <button class="agregar-carrito" data-precio="200" data-nombre="Camisa2">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 5: Camisa3 -->
+    <div class="producto">
+      <img src="Camisa3.jpeg" alt="Camisa3" class="producto-imagen">
+      <h3>Camisa negra</h3>
+      <p>$200.00</p>
+      <button class="agregar-carrito" data-precio="200" data-nombre="Camisa3">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 6: Tenis -->
+    <div class="producto">
+      <img src="tenis.jpg" alt="Tenis" class="producto-imagen">
+      <h3>Tenis</h3>
+      <p>$350.00</p>
+      <button class="agregar-carrito" data-precio="350" data-nombre="Tenis">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 7: Gorra -->
+    <div class="producto">
+      <img src="gorra.jpg" alt="Disco" class="producto-imagen">
+      <h3>Disco</h3>
+      <p>$250.00</p>
+      <button class="agregar-carrito" data-precio="250" data-nombre="Gorra">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <!-- Carrito y total -->
+  <div id="carrito" class="carrito-container">
+    <h3>Carrito</h3>
+    <ul id="carrito-lista"></ul>
+    <p>Total: $<span id="total">0.00</span></p>
+    <div class="botones-carrito">
+      <button id="vaciar-carrito">Vaciar carrito</button>
+      <button id="pagar-carrito">Pagar</button>
+    </div>
+  </div>
+</section>
+
+
+<section class="seccion color1" id="galeria">
+  <h2>Galería</h2>
+  <p>Fotos y videos recientes.</p>
+
+  <!-- Primer slide de "Eventos" -->
+  <div class="slider" id="slider-eventos">
+    <h3>Eventos</h3>
+    <div class="slide-container">
+      <button class="prev" onclick="moveSlide(-1, 'slider-eventos')">❮</button>
+      <div class="slide-images">
+        <img src="eventos1.jpg" alt="Evento 1">
+        <img src="eventos2.jpg" alt="Evento 2">
+        <img src="eventos3.jpg" alt="Evento 3">
+        <img src="eventos4.jpg" alt="Evento 4">
+        <img src="eventos5.jpg" alt="Evento 5">
+        <img src="eventos6.jpg" alt="Evento 6">
+        <img src="eventos7.jpg" alt="Evento 7">
+        <img src="eventos8.jpg" alt="Evento 8">
+        <img src="eventos9.jpg" alt="Evento 9">
+        <img src="eventos10.jpg" alt="Evento 10">
+      </div>
+      <button class="next" onclick="moveSlide(1, 'slider-eventos')">❯</button>
+    </div>
+  </div>
+
+  <!-- Segundo slide de "Shok 2sis" -->
+  <div class="slider" id="slider-shok2sis">
+    <h3>Shok 2sis</h3>
+    <div class="slide-container">
+      <button class="prev" onclick="moveSlide(-1, 'slider-shok2sis')">❮</button>
+      <div class="slide-images">
+        <img src="shok2is1.jpg" alt="Shok 1">
+        <img src="shok2is2.jpg" alt="Shok 2">
+        <img src="shok2is3.jpg" alt="Shok 3">
+        <img src="shok2is4.jpg" alt="Shok 4">
+        <img src="shok2is5.jpg" alt="Shok 5">
+        <img src="shok2is6.jpg" alt="Shok 6">
+        <img src="shok2is7.jpg" alt="Shok 7">
+        <img src="shok2is8.jpg" alt="Shok 8">
+        <img src="shok2is9.jpg" alt="Shok 9">
+        <img src="shok2is10.jpg" alt="Shok 10">
+      </div>
+      <button class="next" onclick="moveSlide(1, 'slider-shok2sis')">❯</button>
+    </div>
+  </div>
+
+  <!-- Tercer slide de "Artes digitales" -->
+  <div class="slider" id="slider-artes">
+    <h3>Artes digitales</h3>
+    <div class="slide-container">
+      <button class="prev" onclick="moveSlide(-1, 'slider-artes')">❮</button>
+      <div class="slide-images">
+        <img src="artedigital1.jpg" alt="Arte 1">
+        <img src="artedigital2.jpg" alt="Arte 2">
+        <img src="artedigital3.jpg" alt="Arte 3">
+        <img src="artedigital4.jpg" alt="Arte 4">
+        <img src="artedigital5.jpg" alt="Arte 5">
+        <img src="artedigital6.jpg" alt="Arte 6">
+        <img src="artedigital7.jpg" alt="Arte 7">
+        <img src="artedigital8.jpeg" alt="Arte 8">
+        <img src="artedigital9.jpg" alt="Arte 9">
+        <img src="artedigital10.jpg" alt="Arte 10">
+      </div>
+      <button class="next" onclick="moveSlide(1, 'slider-artes')">❯</button>
+    </div>
+  </div>
+</section>
+
+
+
+      <footer>
+        <p>© 2025 Shok 2is. Todos los derechos reservados.</p>
+      </footer>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function playSong(songId) {
+      var audioPlayer = document.getElementById('audioPlayer');
+      var audioSource = document.getElementById('audioSource');
+      audioSource.src = songId + '.mp3'; 
+      audioPlayer.load();
+      audioPlayer.play();
+    }
+
+    document.body.classList.add('loading');
+    let loaderText = document.getElementById('loader-text');
+    let loader = document.getElementById('loader');
+    let beatSound = new Audio('sonido.mp3');
+
+    let countdown = ["3...", "2...", "1...", "¡Let's go!"];
+    let index = 0;
+
+    function nextCount() {
+      if (index < countdown.length) {
+        loaderText.innerText = countdown[index];
+        index++;
+        setTimeout(nextCount, 800);
+      } else {
+        beatSound.play();
+        setTimeout(() => {
+          loader.style.opacity = "0";
+          setTimeout(() => {
+            loader.style.display = "none";
+            document.body.classList.remove('loading');
+          }, 500);
+        }, 300);
+      }
+    }
+
+    window.onload = function() {
+      nextCount();
+    };
+  </script>
+
+
+<script>
+  window.addEventListener('load', function() {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      loader.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 500);
+    }, 5000); // 5 segundos
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sections = document.querySelectorAll("section.seccion");
+
+    // Alterna las clases para las secciones
+    sections.forEach((section, index) => {
+      if (index % 2 === 0) {
+        section.classList.add("color2"); // Gris oscuro
+        section.classList.remove("color-blanco"); // Elimina blanco si existe
+      } else {
+        section.classList.add("color-blanco"); // Blanco
+        section.classList.remove("color2"); // Elimina gris si existe
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+<script>
+// Variables globales
+let carrito = [];
+let total = 0;
+
+// Función para agregar productos al carrito
+document.querySelectorAll('.agregar-carrito').forEach(button => {
+  button.addEventListener('click', function() {
+    const precio = parseFloat(this.getAttribute('data-precio'));
+    const nombre = this.getAttribute('data-nombre');
+    
+    // Agregar el producto al carrito
+    carrito.push({ nombre, precio });
+
+    // Actualizar el carrito
+    actualizarCarrito();
+  });
+});
+
+// Función para actualizar el carrito
+function actualizarCarrito() {
+  const carritoLista = document.getElementById('carrito-lista');
+  const totalElemento = document.getElementById('total');
+  
+  // Limpiar la lista de productos
+  carritoLista.innerHTML = '';
+
+  // Mostrar los productos en el carrito
+  carrito.forEach(producto => {
+    const li = document.createElement('li');
+    li.textContent = `${producto.nombre} - $${producto.precio.toFixed(2)}`;
+    carritoLista.appendChild(li);
+  });
+
+  // Calcular el total
+  total = carrito.reduce((acc, producto) => acc + producto.precio, 0);
+  totalElemento.textContent = total.toFixed(2);
+}
+
+// Función para vaciar el carrito
+document.getElementById('vaciar-carrito').addEventListener('click', function() {
+  carrito = [];
+  actualizarCarrito();
+});
+
+// Función para el pago
+document.getElementById('pagar-carrito').addEventListener('click', function() {
+  alert('Compra realizada con éxito');
+});
+</script>
+</script>
+
+<script>
+window.onload = function() {
+  // Inicializar la primera imagen visible al cargar la página
+  document.querySelectorAll('.slide-images').forEach(slideContainer => {
+    const slides = slideContainer.children;
+    slides[0].classList.add('active'); // Agregar 'active' a la primera imagen
+  });
+}
+
+function moveSlide(direction, sliderId) {
+  const slider = document.getElementById(sliderId);
+  const slides = slider.querySelector('.slide-images').children;
+  let activeIndex = -1;
+
+  // Encuentra el índice de la imagen activa
+  for (let i = 0; i < slides.length; i++) {
+    if (slides[i].classList.contains('active')) {
+      activeIndex = i;
+      break;
+    }
+  }
+
+  // Eliminar la clase 'active' de la imagen actual
+  slides[activeIndex].classList.remove('active');
+
+  // Calcular el nuevo índice
+  let newIndex = activeIndex + direction;
+  if (newIndex < 0) {
+    newIndex = slides.length - 1; // Si es menor que 0, va al último slide
+  } else if (newIndex >= slides.length) {
+    newIndex = 0; // Si es mayor que el número de slides, va al primer slide
+  }
+
+  // Activar la nueva imagen
+  slides[newIndex].classList.add('active');
+}
+</script>
+
+</body>
+</html>
